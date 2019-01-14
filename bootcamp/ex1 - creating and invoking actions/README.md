@@ -15,11 +15,9 @@ Once this exercise is finished, we will be able to create simple serverless func
 * [Background](#background)
 * [Creating And Invoking Actions](#creating-and-invoking-actions)
   * [Creating Node.js actions](#creating-node.js-actions)
-  * [Creating Swift actions](#creating-swift-actions)
   * [Invoking actions](#invoking-actions)
 * [Using Action Parameters](#using-action-parameters)
   * [Passing parameters to an action (Node.js)](#passing-parameters-to-an-action-(node.js))
-  * [Passing parameters to an action (Swift)](#passing-parameters-to-an-action-(swift))
   * [Setting default parameters](#setting-default-parameters)
 * [Retrieving Action Logs](#retrieving-action-logs)
   * [Creating Activation Logs](#creating-activation-logs)
@@ -29,7 +27,6 @@ Once this exercise is finished, we will be able to create simple serverless func
   * [Proxy Example](#proxy-example)
 * [Asynchronous Actions](#asynchronous-actions)
   * [Returning asynchronous results (Node.js)](#returning-asynchronous-results-(node.js))
-  * [Returning asynchronous results (Swift)](#returning-asynchronous-results-(swift))
   * [Using actions to call an external API](#using-actions-to-call-an-external-api)
 * [EXERCISES](#exercises)
 
@@ -488,8 +485,6 @@ A call to `reject()` can be used to reject the Promise and signal that the activ
 
 ```
 $ ibmcloud wsk action create asyncAction asyncAction.js
-// OR....
-$ ibmcloud wsk action create asyncAction asyncAction.swift
 ```
 
 ```
