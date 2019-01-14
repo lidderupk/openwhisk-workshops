@@ -74,36 +74,6 @@ hello       private
 
 You can see the `hello` action you just created.
 
-#### Creating Swift actions
-
-Review the following steps and examples to create your first Swift action.
-
-1. Create a Swift file with the following content. For this example, the file name is 'hello.swift'.
-
-```swift
-func main(args: [String:Any]) -> [String:Any] {
-	return [ "payload" : "Hello world" ]
-}
-```
-
-The Swift file might contain additional functions. However, by convention, a function called `main` must exist to provide the entry point for the action.
-
-1. Create an action from the following Swift function. For this example, the action is called 'hello'.
-
-```
-$ ibmcloud wsk action create hello hello.swift
-ok: created action hello
-```
-
-1. List the actions that you have created:
-
-```
-$ ibmcloud wsk action list
-actions
-/user@host.com_dev/hello                                     private swift:3.1.1
-```
-
-You can see the `hello` action you just created.
 
 #### Invoking Actions
 
@@ -202,27 +172,6 @@ The input parameters are passed as a JSON object parameter to the `main` functio
 $ ibmcloud wsk action update hello hello.js
 ```
 
-#### Passing parameters to an action (Swift)
-
-1. Update the file `hello.swift` with the following following content:
-
-```swift
-func main(args: [String:Any]) -> [String:Any] {
-    if let name = args["name"] as? String, let place = args["place"] as? String {
-        return [ "payload" : "Hello \(name) from \(place)" ]
-    } else {
-        return [ "payload" : "Hello stranger from nowhere" ]
-    }
-}
-```
-
-The input parameters are passed as a Dictionary (`String:Any`) to the `main` function. Functions must return a Dictionary of the same type with response values. Notice how the `name` and `place` parameters are retrieved from the `args` dictionary in this example.
-
-1. Update the `hello` action with the new source code.
-
-```
-$ ibmcloud wsk action update hello hello.swift
-```
 
 #### Invoking action with parameters
 
@@ -268,18 +217,6 @@ Parameter values can be any valid JSON value, including nested objects. Let's up
 ```javascript
 function main(params) {
     return {payload:  'Hello, ' + params.person.name + ' from ' + params.person.place};
-}
-```
-
-##### Swift
-
-```swift
-func main(args: [String:Any]) -> [String:Any] {
-    if let person = args["person"] as? [String: String], let name = person["name"] as? String, let place = person["place"] as? String {
-        return [ "payload" : "Hello \(name) from \(place)" ]
-    } else {
-        return [ "payload" : "Hello stranger from nowhere" ]
-    }
 }
 ```
 
@@ -377,31 +314,6 @@ $ ibmcloud wsk action create logs logs.js
 ok: created action logs
 ```
 
-##### Swift
-
-````javascript
-import Foundation
-
-var standardError = FileHandle.standardError
-
-extension FileHandle : TextOutputStream {
-    public func write(_ string: String) {
-        guard let data = string.data(using: .utf8) else { return }
-        self.write(data)
-    }
-}
-
-func main(args: [String:Any]) -> [String:Any] {    
-    print("function called with params", args)
-    print("this is an error message",to:&standardError)
-    return ["result": true]
-}
-````
-
-```
-$ ibmcloud wsk action create logs logs.swift
-ok: created action logs
-```
 
 2. Invoke the `logs` action to generate some logs.
 
@@ -514,30 +426,6 @@ function main(params) {
 $ ibmcloud wsk action create proxy proxy.js
 ```
 
-##### Swift
-
-```swift
-func main(args: [String:Any]) -> [String:Any] {
-    guard let password = args["password"] as? String, password == "secret" else {
-        return ["error": "Password is incorrect!"]
-    }
-
-    let resp = Whisk.invoke(actionNamed: "hello", withParameters: args, blocking: true)
-
-    guard let response = resp["response"] as? [String: Any], let result = response["result"] as? [String: Any] else {
-        return ["error": "Unable to parse response result."]
-    }
-
-    return result
-}
-```
-
-This Swift file is included in the runtime to provide a small utility for invoking platform APIs: [https://github.com/apache/incubator-openwhisk-runtime-swift/blob/master/core/swift3.1.1Action/spm-build/_Whisk.swift](https://github.com/apache/incubator-openwhisk-runtime-swift/blob/master/core/swift3.1.1Action/spm-build/_Whisk.swift)
-
-```
-$ ibmcloud wsk action create proxy proxy.swift
-```
-
 2. Invoke the proxy with an incorrect password.
 
 ```
@@ -593,30 +481,6 @@ The Promise's callback takes two arguments, resolve and reject, which are both f
 
 A call to `reject()` can be used to reject the Promise and signal that the activation has completed abnormally.
 
-#### Returning asynchronous results (Swift)
-
-Swift functions that use asynchronous processing must block returning until those asynchronous results are available. Here's an example which prints a message after an interval to demonstrate this approach.
-
-1. Save the following content in a file called `asyncAction.swift`.
-
-```swift
-import Foundation
-import CoreFoundation
-
-func main(args: [String:Any]) -> [String:Any] {
-  Timer.scheduledTimer(withTimeInterval: 2, repeats: false)  { _ in
-    print("Timer fired.")
-    CFRunLoopStop(CFRunLoopGetMain())
-  }
-  print("Waiting on timer...")
-  CFRunLoopRun()
-  return [ "done" : true ]
-}
-```
-
-Using the `CFRunLoopRun` function, we can wait on the asynchronous timer to fire. Once the timer fires, the run loop is stopped.
-
-Other approaches to blocking on asynchronous results in Swift include semaphores, dispatch barriers and other concurrency primitives in the language.
 
 #### Testing asynchronous timeouts
 
