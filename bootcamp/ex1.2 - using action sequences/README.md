@@ -78,49 +78,6 @@ $ ibmcloud wsk action create reverse funcs.js --main reverse
 $ ibmcloud wsk action create join funcs.js --main join
 ```
 
-#### Swift
-
-1. Create the file (`funcs.swift`) with the following contents:
-
-```swift
-import Foundation
-
-func split(args: [String:Any]) -> [String:Any] {
-    var words = [String]()
-
-    if let text = args["text"] as? String {
-        words = text.components(separatedBy: " ")
-    }
-    return ["words": words]
-}
-
-func reverse(args: [String:Any]) -> [String:Any] {
-    guard let words = args["words"] as? [String] else {
-        return ["words": []]
-    }
-
-    let reversed = words.map { String($0.characters.reversed()) }
-
-    return ["words": reversed]
-}
-
-func join(args: [String:Any]) -> [String:Any] {
-    guard let words = args["words"] as? [String] else {
-        return ["words": ""]
-    }
-
-    return ["words": words.joined(separator: " ")]
-}
-```
-
-1. Create the following three actions
-
-```
-$ bx wsk action create split funcs.swift --main split
-$ bx wsk action create reverse funcs.swift --main reverse
-$ bx wsk action create join funcs.swift --main join
-```
-
 #### Creating Sequence Actions
 
 1. Test each action to verify it is working
