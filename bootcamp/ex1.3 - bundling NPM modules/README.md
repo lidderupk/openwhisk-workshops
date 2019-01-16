@@ -83,8 +83,8 @@ Let's build a sample action which uses an external NPM dependency, not available
 {
   "name": "my-action",
   "main": "index.js",
-  "dependencies" : {
-    "left-pad" : "1.1.3"
+  "dependencies": {
+    "lorem-ipsum": "^1.0.6"
   }
 }
 ```
@@ -92,13 +92,13 @@ Let's build a sample action which uses an external NPM dependency, not available
 2. Create an `index.js  `with the following code in:
 
 ```javascript
-function myAction(args) {
-    const leftPad = require("left-pad")
-    const lines = args.lines || [];
-    return { padded: lines.map(l => leftPad(l, 30, ".")) }
+var loremipsum = require("lorem-ipsum")
+
+function main() {
+  return {"greeting": loremipsum()};
 }
 
-exports.main = myAction;
+exports.main = main;
 ```
 
 Note that the action is exposed through `exports.main`; the action handler itself can have any name, as long as it conforms to the usual signature of accepting an object and returning an object (or a `Promise` of an object). Per Node.js convention, you must either name this file `index.js` or specify the file name you prefer as the `main`property in package.json.
@@ -130,13 +130,9 @@ Note that when creating an action from a `.zip` archive using the CLI tool, you 
 6. You can invoke the action like any other:
 
 ```
-$ ibmcloud wsk action invoke --result packageAction --param lines "[\"and now\", \"for something completely\", \"different\" ]"
+$ ibmcloud wsk action invoke --result packageAction 
 {
-    "padded": [
-        ".......................and now",
-        "......for something completely",
-        ".....................different"
-    ]
+    "greeting": "Aliqua tempor laboris dolore velit laborum laborum nostrud ex proident."
 }
 ```
 
