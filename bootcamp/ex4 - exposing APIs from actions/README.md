@@ -155,22 +155,6 @@ $ ibmcloud wsk action create redirect action.js --web true
 ok: created action redirect
 ```
 
-##### Swift example
-
-```swift
-func main(args: [String:Any]) -> [String:Any] {
-    return [
-        "headers": ["location": "http://openwhisk.org"],
-        "statusCode": 302
-    ]
-}
-```
-
-```
-$ ibmcloud wsk action create redirect action.swift --web true
-ok: created action redirect
-```
-
 2. Retrieve URL for new web action
 
 ```
@@ -215,27 +199,9 @@ $ ibmcloud wsk action create html action.js --web true
 ok: created action html
 ```
 
-##### Swift example
-
-```swift
-func main(args: [String:Any]) -> [String:Any] {
-    let html = "<html><body>Hello World!</body></html>"
-    return [
-        "headers": ["Content-Type": "text/html"],
-        "statusCode": 200,
-        "body": html
-    ]
-}
-```
-
-```
-$ ibmcloud wsk action create html action.swift --web true
-ok: created action html
-```
-
 1. Retrieve URL for new web action
 
-```swift
+```
 $ ibmcloud wsk action get html --url
 ok: got action html
 https://openwhisk.ng.bluemix.net/api/v1/web/user%40host.com_dev/default/html
@@ -275,25 +241,6 @@ $ ibmcloud wsk action create image action.js --web true
 ok: created action image
 ```
 
-##### Swift
-
-```swift
-func main(args: [String:Any]) -> [String:Any] {
-    let png = "<BASE64 ENCODED IMAGE STRING>"
-
-    return [
-        "headers": ["Content-Type": "image/png"],
-        "statusCode": 200,
-        "body": png
-    ]
-}
-```
-
-```
-$ ibmcloud wsk action create image action.swift --web true
-ok: created action image
-```
-
 3. Retrieve URL for new web action.
 
 ```
@@ -324,23 +271,6 @@ function main(params) {
 
 ```
 $ ibmcloud wsk action create manual action.js --web true
-ok: created action manual
-```
-
-##### Swift
-
-```javascript
-func main(args: [String:Any]) -> [String:Any] {
-    return [
-        "headers": ["Content-Type": "application/json"],
-        "statusCode": 200,
-        "body": args
-    ]
-}
-```
-
-```
-$ bx wsk action create manual action.swift --web true
 ok: created action manual
 ```
 
