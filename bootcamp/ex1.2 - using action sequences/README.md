@@ -196,7 +196,7 @@ Return the JSON from the existing `reverse_words` action.
 }
 ```
 
-If the `password` parameter does match an expected value (`mysecret`), return an error.
+If the `password` parameter does not match an expected value (`mysecret`), return an error.
 
 #### Resources
 
