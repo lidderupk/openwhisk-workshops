@@ -50,7 +50,7 @@ exports.main = function (params) {
 
 Alternatively
 
-```
+```javascript
 function main(params) {
   return {msg:"Hello World"};
 }
