@@ -48,7 +48,7 @@ exports.main = function (params) {
 };
 ```
 
-Alternatively
+Alternatively,
 
 ```javascript
 function main(params) {
@@ -98,6 +98,8 @@ Let's build a sample action which uses an external NPM dependency, not available
   }
 }
 ```
+
+Alternatively, run the following command `npm install lorem-ipsum@^1.0.6 `
 
 2. Create an `index.js  `with the following code in:
 
