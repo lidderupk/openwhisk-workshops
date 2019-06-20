@@ -48,6 +48,16 @@ exports.main = function (params) {
 };
 ```
 
+Alternatively
+
+```
+function main(params) {
+  return {msg:"Hello World"};
+}
+
+module.exports.main = main;
+```
+
 3. Creating a zip file from the current directory.
 
 ```
