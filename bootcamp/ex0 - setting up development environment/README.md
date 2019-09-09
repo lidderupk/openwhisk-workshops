@@ -25,7 +25,7 @@ Once this exercise is finished, we can start to develop serverless applications 
 
 1. Open a browser window 
 
-2. Navigate to [https://console.bluemix.net/registration/](https://ibm.biz/BdZf65)
+2. Navigate to [http://bit.ly/ibmcloud-signup](http://bit.ly/ibmcloud-signup)
 
    ![Registration page](images/registration.png)
 
@@ -33,7 +33,7 @@ Once this exercise is finished, we can start to develop serverless applications 
 
    ![Registration page](images/email.png)
 
-4. [Login into IBM Cloud](https://console.bluemix.net/login) using the account credentials you have registered.
+4. [Login into IBM Cloud](http://bit.ly/ibmcloud-signup) using the account credentials you have registered.
 
 ### Check Default Region (Lite Account Users)
 
